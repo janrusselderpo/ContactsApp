@@ -49,11 +49,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun executeFilterSearch(newText:String){
-        if (newText.isNullOrEmpty()) {
+        if (newText.isNotEmpty()) {
             adapter.filter.filter("")
         } else {
             val startTime = System.nanoTime()
-            adapter.filter.filter(newText.toString().trim())
+            adapter.filter.filter(newText.trim())
             val endTime = System.nanoTime()
             val executionTime = endTime - startTime
             val executionTimeInMs = executionTime / 1_000_000.0

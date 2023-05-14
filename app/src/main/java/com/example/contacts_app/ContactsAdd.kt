@@ -4,11 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
+import com.example.contacts_app.databinding.ActivityContactsAddBinding
 
 
 class ContactsAdd : AppCompatActivity() {
@@ -16,18 +14,20 @@ class ContactsAdd : AppCompatActivity() {
     private lateinit var surnameEditText: EditText
     private lateinit var phoneEditText: EditText
     private lateinit var emailEditText: EditText
+    private lateinit var binding: ActivityContactsAddBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contacts_add)
+        binding = ActivityContactsAddBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        firstNameEditText = findViewById(R.id.firstname_input)
-        surnameEditText = findViewById(R.id.surname_input)
-        phoneEditText = findViewById(R.id.phone_input)
-        emailEditText = findViewById(R.id.email_input)
+        firstNameEditText = binding.firstnameInput
+        surnameEditText = binding.surnameInput
+        phoneEditText = binding.phoneInput
+        emailEditText = binding.emailInput
 
-        val backButton = findViewById<ImageButton>(R.id.back_button)
-        val saveButton = findViewById<Button>(R.id.save_button)
+        val backButton = binding.backButton
+        val saveButton = binding.saveButton
 
 
         backButton.setOnClickListener {
@@ -37,10 +37,10 @@ class ContactsAdd : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
-            val firstname = firstNameEditText.text.toString().trim()
-            val surname = surnameEditText.text.toString().trim()
-            val phone = phoneEditText.text.toString().trim()
-            val email = emailEditText.text.toString().trim()
+            val firstname = binding.firstnameInput.text.toString().trim()
+            val surname = binding.surnameInput.text.toString().trim()
+            val phone = binding.phoneInput.text.toString().trim()
+            val email = binding.emailInput.text.toString().trim()
 
             if(firstname.isEmpty()){
                 firstNameEditText.error = "Firstname is Required"
@@ -70,6 +70,7 @@ class ContactsAdd : AppCompatActivity() {
         // Finish the activity and return to the MainActivity
         finish()
     }
+
     private fun isEmailValid(email: String): Boolean {
         if(email.isBlank()){
             return true
